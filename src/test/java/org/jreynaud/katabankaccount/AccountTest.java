@@ -74,7 +74,7 @@ class AccountTest {
 
 	@Test
 	public void should_ThrowException_when_BalanceIsNegative() {
-		assertThrows(ArithmeticException.class,
+		assertThrows(IllegalStateException.class,
 				() -> {account.withdraw(150);});
 	}
 }

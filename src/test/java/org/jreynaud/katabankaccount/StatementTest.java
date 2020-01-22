@@ -7,6 +7,12 @@ import org.jreynaud.katabankaccount.Statement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/*
+ *  I could have made a Date Factory
+ *  in order to test the value and not 
+ *  only the presence of a date in a statement
+ */
+
 class StatementTest {
 
 	private Account account;
@@ -54,28 +60,28 @@ class StatementTest {
 	}
 	
 	@Test
-	public void should_HaveAmountOf10_when_WithdrawOf10() {
+	public void should_HaveAmountOf10_when_DepositIsDone_then_WithdrawOf10() {
 		account.deposit(20);
 		account.withdraw(10);
 		assertEquals(10, account.getStatements().get(1).getAmount());
 	}
 	
 	@Test
-	public void should_HaveBalanceOf20_when_WithdrawOf20() {
+	public void should_HaveBalanceOf20_when_DepositIsDone_then_WithdrawOf20() {
 		account.deposit(40);
 		account.withdraw(20);
 		assertEquals(20, account.getStatements().get(1).getBalance());
 	}
 	
 	@Test
-	public void should_HaveWithdrawOperationType_when_WithdrawIsDone() {
+	public void should_HaveWithdrawOperationType_when_DepositIsDone_then_WithdrawIsDone() {
 		account.deposit(20);
 		account.withdraw(10);
 		assertEquals(Statement.WITHDRAW, account.getStatements().get(1).getOperationType());
 	}
 	
 	@Test
-	public void should_HaveDate_when_WithdrawIsDone() {
+	public void should_HaveDate_when_DepositIsDone_then_WithdrawIsDone() {
 		account.deposit(100);
 		account.withdraw(10);
 		assertTrue(account.getStatements().get(1).getDate() != null);

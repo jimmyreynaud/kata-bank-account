@@ -1,6 +1,7 @@
 package org.jreynaud.katabankaccount;
 
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
 
 public final class Statement {
@@ -16,8 +17,8 @@ public final class Statement {
 	public Statement(int amount, int balance, String operationType, ZonedDateTime date) {
 		this.amount = amount;
 		this.balance = balance;
-		this.operationType = operationType;
-		this.date = date;
+		this.operationType = Objects.requireNonNull(operationType, "operationType must not be null");
+		this.date = Objects.requireNonNull(date, "date must not be null");
 	}
 
 	public int getAmount() {

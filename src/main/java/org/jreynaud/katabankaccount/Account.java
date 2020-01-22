@@ -18,8 +18,8 @@ public class Account {
 		doOperation(amount, Statement.DEPOSIT);
 	}
 
-	public void withdraw(int amount) {	
-		if (this.balance - amount < 0) throw new ArithmeticException("Balance is too low");
+	public void withdraw(int amount) throws IllegalStateException {	
+		if (this.balance - amount < 0) throw new IllegalStateException("Balance is too low");
 		doOperation(amount, Statement.WITHDRAW);
 	}
 	

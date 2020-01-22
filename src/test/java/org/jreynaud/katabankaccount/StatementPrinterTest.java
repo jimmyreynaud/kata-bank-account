@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +34,11 @@ class StatementPrinterTest {
 	public void should_PrintCorrectFormattedStatements_when_PrintHistoryAfterOneDepositAndOneWithdraw() {
 		List<Statement> statements = new ArrayList<>();
 
-		String depositeDateString = "2019-12-08T10:15:30+01:00[Europe/Paris]";
-		String withdrawDateString = "2019-12-09T10:15:30+01:00[Europe/Paris]";
+		LocalDateTime localDepositDate = LocalDateTime.of(2019, 12, 8, 10, 15);
+		LocalDateTime localWithdrawDate = LocalDateTime.of(2019, 12, 9, 10, 15);
 
-		ZonedDateTime depositDate = ZonedDateTime.parse(depositeDateString);
-		ZonedDateTime withdrawDate = ZonedDateTime.parse(withdrawDateString);
+		ZonedDateTime depositDate = ZonedDateTime.of(localDepositDate, ZoneId.of("Europe/Paris"));
+		ZonedDateTime withdrawDate = ZonedDateTime.of(localWithdrawDate, ZoneId.of("Europe/Paris"));
 
 		statements.add(new Statement(1000, 1000, Statement.DEPOSIT, depositDate));
 		statements.add(new Statement(500, 500, Statement.WITHDRAW, withdrawDate));
@@ -48,7 +50,7 @@ class StatementPrinterTest {
 		sb.append("OPERATION | DATE | AMOUNT | BALANCE |\n");
 		sb.append("Deposit | 08/12/2019 - 10:15 | 1000 | 1000 |\n");
 		sb.append("Withdraw | 09/12/2019 - 10:15 | -500 | 500 |\n");
-
+		
 		assertEquals(sb.toString(), outContent.toString());		
 	}
 }
